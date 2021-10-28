@@ -1,6 +1,6 @@
-import { NextResponse } from "next/server";
-import { getCohort } from "../experiment/ab-testing";
-import { COHORTS, COOKIE_NAME } from "../experiment/exp001";
+import { NextResponse } from 'next/server';
+import { getCohort } from '../experiment/ab-testing';
+import { COHORTS, COOKIE_NAME } from '../experiment/exp001';
 
 export function middleware(req) {
   // Get the bucket cookie
