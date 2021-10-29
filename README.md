@@ -2,6 +2,10 @@
 
 This sample app shows you how to set up a simple A/B test with Vercel Edge Functions. In this example, we run a simple 50/50 split experiment with button colors and log the results to amplitude for analysis.
 
+![Example App](https://github.com/servoice/nextjs-vercel-edge-ab-test-example/blob/main/public/example.png?raw=true)
+
+![Amplitude Dash](https://github.com/servoice/nextjs-vercel-edge-ab-test-example/blob/main/public/amplitude-dash.png?raw=true)
+
 ## Deploy your own
 
 Deploy the example using Vercel:
