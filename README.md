@@ -10,7 +10,7 @@ Deploy the example using Vercel:
 
 ## How to use
 
-Git clone this repository, add in your `NEXT_PUBLIC_AMPLITUDE` API key in a `.env.local' file
+Git clone this repository, add in your `NEXT_PUBLIC_AMPLITUDE` API key in a `.env.local` file
 
 ```bash
 npm install && npm run dev
