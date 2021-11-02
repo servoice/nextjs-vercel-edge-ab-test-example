@@ -1,42 +1,21 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable react/jsx-one-expression-per-line */
-import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Cookies from 'js-cookie';
 import { COHORTS } from '../experiment/exp001';
-import {
-  amplitudeInit,
-  logEvent,
-  logExperimentExposure,
-} from '../libs/amplitude';
 
-export default function Cohort({
-  btnColor,
-  experimentCohort,
-  experimentName,
-}) {
+export default function Cohort() {
   const router = useRouter();
+  const cohort = router.query.exp001;
 
-  // remove cookies for testing and logging to amplitude
-  const resetCohort = () => {
-    const allCookies = Cookies.get();
-    Object.keys(allCookies).map((cookie) => {
-      if (cookie.startsWith('amp_')) {
-        Cookies.remove(cookie);
-      }
-    });
+  const removeCohort = () => {
+    // removes experiment cookie
     Cookies.remove('exp001-cohort');
+    // reloads the page to run middlware
+    // and request a new cohort
     router.reload();
   };
-
-  useEffect(() => {
-    // if browser initialize amplitude
-    if (typeof window !== 'undefined') {
-      amplitudeInit();
-      logExperimentExposure(experimentName, experimentCohort);
-    }
-  }, []);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
@@ -57,35 +36,13 @@ export default function Cohort({
           </span>{' '}
           With Amplitude
         </h1>
-        <div className="py-2 text-xl">
-          <p>
-            The button color below will change based on the
-            user&apos;s cohort. Users in the control will see a{' '}
-            <span className="text-purple-700 font-bold">Purple</span>{' '}
-            button, while users in the variant will see a{' '}
-            <span className="text-blue-700 font-bold">Blue</span>{' '}
-            button.
-          </p>
-        </div>
-        <div className="flex flex-col space-y-2 py-2">
-          <button
-            type="button"
-            // log the amplitude event for our goal of sign up
-            onClick={() => logEvent('Clicked Get Started Free')}
-            className={`${btnColor} p-2 rounded-md text-white`}
-          >
-            Get Started Free
-          </button>
-          <div>
-            <pre>{experimentCohort}</pre>
-          </div>
+        <div className="p-4">
+          <pre>{cohort}</pre>
         </div>
 
-        <div className="p-4">
-          <button type="button" onClick={resetCohort}>
-            Reset Cohort
-          </button>
-        </div>
+        <button type="button" onClick={removeCohort}>
+          Reset Cohort
+        </button>
       </main>
     </div>
   );
